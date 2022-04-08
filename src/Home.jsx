@@ -33,8 +33,8 @@ const CenterContainer = styled.div`
   justify-content: center;
 `;
 const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
+  min-width: 100vw;
+  min-height: 100vh;
   background-image: url("pattern.svg");
   background-color: #f96d5f;
   background-repeat: repeat;
@@ -42,6 +42,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  overflow: hidden;
 `;
 const Title = styled.h1`
   font-size: 110px;

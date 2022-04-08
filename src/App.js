@@ -1,9 +1,11 @@
 import Home from "./Home";
+import Quiz from "./Quiz";
 
 function App() {
   return (
-    <div className="App">
+    <div style={{ overflow: "hidden" }}>
       <Home />
+      <Quiz />
     </div>
   );
 }

@@ -1,0 +1,53 @@
+.button_holder {
+  display: flex;
+  width: 100%;
+  padding: 1rem 20px;
+  justify-content: space-between;
+}
+.button_holder span {
+  font-family: "General Sans","sans serif";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 27px;
+  /* identical to box height */
+
+  color: #19237c;
+}
+.button_holder_left,
+.button_holder_right {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.button_holder_left img {
+  margin-right: 0.5rem;
+}
+.button_holder_right img {
+  margin-left: 0.5rem;
+}
+.button_holder_right img {
+  transform: rotate(180deg);
+}
+
+
+.quiz_input{
+    background: #E5E9FF;
+    box-sizing: border-box;
+border: 1px solid #333333;
+box-sizing: border-box;
+border-radius: 16px;
+padding: 12px 20px;
+width: 305px;
+font-family: 'General Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 27px;
+/* identical to box height */
+
+
+/* Neutral / 2 */
+
+color: #696974;
+}

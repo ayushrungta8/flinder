@@ -1,0 +1,28 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+@font-face {
+  font-family: "Aberforth";
+  src: url("/fonts/Aberforth.ttf");
+}
+
+@font-face {
+  font-family: "General Sans";
+  src: url("/fonts/GeneralSans.ttf");
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+h1{
+  margin: 0px;
+  padding: 0px;
+}

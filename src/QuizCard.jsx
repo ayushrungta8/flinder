@@ -1,6 +1,5 @@
 import { useState } from "react";
 import styled from "styled-components";
-import FeatherIcon from "feather-icons-react";
 
 const QuizCard = ({ question, answers, setAnswers, quizQuestions, currentPage, setCurrentPage }) => {
   const [selectedOption, setSelectedOption] = useState("");

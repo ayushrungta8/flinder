@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Questions } from "./Questions";
 import QuizCard from "./QuizCard";
-const Quiz = () => {
+const Quiz = ({currentPage,setCurrentPage}) => {
   const [answers, setAnswers] = useState({});
   useEffect(() => {
     console.log(answers);
@@ -11,15 +11,16 @@ const Quiz = () => {
   return (
     <Container>
       <Title>QUIZ</Title>
-      {quizQuestions.map((question, index) => (
+      
         <QuizCard
-          question={question}
+          question={quizQuestions[currentPage]}
           quizQuestions={quizQuestions}
-          key={index}
           answers={answers}
           setAnswers={setAnswers}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
         />
-      ))}
+      
     </Container>
   );
 };

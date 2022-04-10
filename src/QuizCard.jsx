@@ -1,7 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
+import FeatherIcon from "feather-icons-react";
 
-const QuizCard = ({ question, answers, setAnswers, quizQuestions }) => {
+const QuizCard = ({ question, answers, setAnswers, quizQuestions, currentPage, setCurrentPage }) => {
   const [selectedOption, setSelectedOption] = useState("");
   const [multiSelectedOptions, setMultiSelectedOptions] = useState([]);
   const handleSelect = (option) => {
@@ -39,10 +40,16 @@ const QuizCard = ({ question, answers, setAnswers, quizQuestions }) => {
       <ProgressBarContainer>
         <ProgressBar />
       </ProgressBarContainer>
-      <Heading>
-        Question {quizQuestions.indexOf(question) + 1}/{quizQuestions.length}
-      </Heading>
+
+      <QuestionHeader>
+        <NavigationButton onClick={() =>currentPage!==0 && setCurrentPage(currentPage - 1)} disabled={currentPage===0}>&lt; Previous</NavigationButton>
+        <Heading>
+          Question {quizQuestions.indexOf(question) + 1}/{quizQuestions.length}
+        </Heading>
+        <NavigationButton onClick={() => currentPage!==quizQuestions.length-1 && setCurrentPage(currentPage + 1)} disabled={currentPage===quizQuestions.length-1}>Next &gt;</NavigationButton>
+      </QuestionHeader>
       <QuestionContainer>
+
         <Question>{question.question.text}</Question>
         {question.type === "select" &&
           question.options.map((option, index) => (
@@ -101,17 +108,32 @@ const ProgressBar = styled.div`
 const Heading = styled.div`
   font-size: 28px;
   font-weight: 300;
-  margin-top: 40px;
-`;
+  display: flex;
+  align-items: center;
+  `;
 const Question = styled.div`
   font-size: 28px;
   font-weight: 400;
   margin: 20px 0;
-`;
+  `;
 const QuestionContainer = styled.div``;
+const QuestionHeader = styled.div`
+margin-top: 40px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+width:100%;
+padding: 0 10px;
+`;
+const NavigationButton = styled.div`
+font-size: 20px;
+/* color:#19237C; */
+color: ${(props) => (props.disabled ? "#ccc" : "#19237C")}; 
+cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+
+
+`
 const Option = styled.label`
-  /* max-width: 600px; */
-  /* background-color: #c2ccff; */
   background-color: ${(props) =>
     props.selectedOption.includes(props.option) ? "#c2ccff" : "#E5E9FF"};
   padding: 15px;

@@ -4,15 +4,18 @@ import { Questions } from "./Components/Question";
 import QuizCard from "./Components/QuizCard";
 import styles from "../styles/quiz.module.css"
 import { mapper } from "../helpers/mapper";
-import {create_new_form} from "../remote/newForm";
+import { create_new_form } from "../remote/newForm";
+import { reply_to_form } from "../remote/fillForm";
+
+import { useRouter } from "next/router";
 
 
-export default function Quiz() {
-  const [answers, setAnswers] = useState(["","","","","","","","","","","",[],""]);
+export default function Quiz({ id }) {
+  const [answers, setAnswers] = useState(["", "", "", "", "", "", "", "", "", "", "", [], ""]);
   const [index, setIndex] = useState(0); // current question that has to be displayed
   const quizQuestions = [...Questions];
   console.log(quizQuestions);
-
+  const router = useRouter() // router hook
   const handleSimpleSelect = (value) => {
     let copy = [...answers];
     copy[index] = value;
@@ -30,25 +33,49 @@ export default function Quiz() {
     setAnswers(copy);
   };
 
-  const go_back = ()=>{
-    if(index>0){
-      setIndex(ind => ind-1)
+  const go_back = () => {
+    if (index > 0) {
+      setIndex(ind => ind - 1)
     }
   }
 
-  const form_submission =async  (processed_data)=>{
-    let response = await create_new_form(processed_data)
-    if(!response){
-      // something went wrong
-    }else{
-      // do things now
-      console.log(response)
+  const form_submission = async (processed_data) => {
+
+    // decide if the form have an id
+    if (id) {
+      // this form is for a compatibility test
+      let response = await reply_to_form({
+        ...processed_data,
+        filling_for: [id]
+      })
+
+      if (!response) {
+        // something went wrong
+      } else {
+        // do things now
+        router.push(`/score?my_id=${response.data.user_data.id}&name=${response.data.original.fields.name}&match=${response.data.compatibility.matches[0]}&no_match=${response.data.compatibility.not_matches[0]}&score=${response.data.compatibility.score}`)
+        console.log(response)
+      }
+
+
+    } else {
+      // this form is for new submission
+      let response = await create_new_form(processed_data)
+     alert(response)
+      if (!response) {
+        // something went wrong
+      } else {
+        // do things now
+        router.push("/share?id=" + response.data.id)
+        console.log(response)
+      }
     }
+
   }
-  const go_next = ()=>{
-    if(index<12){
-      setIndex(ind => ind+1)
-    }else{
+  const go_next = () => {
+    if (index < 12) {
+      setIndex(ind => ind + 1)
+    } else {
       // this is the finish button let's hit the fucking backend
       console.log(answers)
       let processed_data = mapper(answers)
@@ -61,16 +88,16 @@ export default function Quiz() {
       <Title>QUIZ</Title>
       <Card>
         <ProgressBarContainer>
-          <ProgressBar style={{width:parseInt((index*100)/12)+'%'}} />
+          <ProgressBar style={{ width: parseInt((index * 100) / 12) + '%' }} />
         </ProgressBarContainer>
         <div className={styles.button_holder}>
           <div className={styles.button_holder_left} onClick={go_back} >
-            <img src="/left-arrow.png" alt="it's a left arrow to go to previous question"/>
+            <img src="/left-arrow.png" alt="it's a left arrow to go to previous question" />
             <span>Previous</span>
           </div>
           <div className={styles.button_holder_right} onClick={go_next}>
-            <span>{index==12 ? "Finish 🎉":"Next"}</span>
-            <img src="/left-arrow.png" alt="it's a right arrow to go to next question"/>
+            <span>{index == 12 ? "Finish 🎉" : "Next"}</span>
+            <img src="/left-arrow.png" alt="it's a right arrow to go to next question" />
           </div>
         </div>
         <Heading>Question {index}/12</Heading>
@@ -91,7 +118,11 @@ export default function Quiz() {
   );
 }
 
+Quiz.getInitialProps = async ({ query }) => {
+  const { id } = query
 
+  return { id }
+}
 
 const Card = styled.div`
   // min-width: 600px;

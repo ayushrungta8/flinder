@@ -5,43 +5,67 @@ import styled from "styled-components";
 // import { feather } from "feather-icons";
 import FeatherIcon from "feather-icons-react";
 import Image from "next/image";
-export default function Home() {
+import { generate_url,copyToClipboard } from "../helpers/sharing";
+
+export default function Share({ id }) {
+  const url = `http://localhost:3000/quiz?id=${id}`
   return (
     <Container>
-    <PseudoDiv>a</PseudoDiv>
-    <CenterContainer>
-      <Title>Cheers, you're done!</Title>
-      <Subtitle>Share this link with your potential roommates and see if it’s meant to be.</Subtitle>
-      <CopyBox>
-          <CopyBoxP>Hello</CopyBoxP>
-            <CopyBoxBtn>Copy link</CopyBoxBtn>
-      </CopyBox>
+      <PseudoDiv>a</PseudoDiv>
+      <CenterContainer>
+        <Title>Cheers, you're done!</Title>
+        <Subtitle>Share this link with your potential roommates and see if it’s meant to be.</Subtitle>
+        <CopyBox>
+          <CopyBoxP>{url}</CopyBoxP>
+          <CopyBoxBtn onClick={()=>{
+            copyToClipboard(url)
+          }}>Copy link</CopyBoxBtn>
+        </CopyBox>
         <ShareBox>
-            <ShareBoxButton>
-                <FeatherIcon icon={"copy"}/>
-            </ShareBoxButton>
-            <ShareBoxButton>
-                <FeatherIcon icon={"mail"}/>
-            </ShareBoxButton>
-            <ShareBoxButton>
-                <FeatherIcon icon={"twitter"}/>
-            </ShareBoxButton>
-            <ShareBoxButton>
-                <FeatherIcon icon={"facebook"}/>
-            </ShareBoxButton>
-            <ShareBoxButton style={{marginRight:"0px"}}>
-                <FeatherIcon icon={"instagram"}/>
-            </ShareBoxButton>
+          <ShareBoxButton>
+            <FeatherIcon onClick={()=>{
+            copyToClipboard(url)
+          }} icon={"copy"} />
+          </ShareBoxButton>
+          <ShareBoxButton>
+            <a href={generate_url('gmail', {
+              text: 'check our compatibility score dude',
+              url
+            })}>
+              <FeatherIcon icon={"mail"} />
+            </a>
+
+          </ShareBoxButton>
+          <ShareBoxButton>
+            <a href={generate_url('twittertweet', {
+              text: 'check our compatibility score dude',
+              url
+            })}>
+              <FeatherIcon icon={"twitter"} />
+            </a>
+          </ShareBoxButton>
+          <ShareBoxButton>
+            <FeatherIcon icon={"facebook"} />
+          </ShareBoxButton>
+          <ShareBoxButton style={{ marginRight: "0px" }}>
+            <FeatherIcon icon={"instagram"} />
+          </ShareBoxButton>
         </ShareBox>
-    </CenterContainer>
-    <FrameBox>
-        <Image src="/frame.png" height={"180px"} width={"224px"} alt="This is the beautiful frame that Karthika created"/>
-    </FrameBox>
-    <FrameBox2>
-        <Image  height={"180px"} width={"224px"} src="/frame.png" alt="This is the beautiful frame that Karthika created"/>
-    </FrameBox2>
-  </Container>
+      </CenterContainer>
+      <FrameBox>
+        <Image src="/frame.png" height={"180px"} width={"224px"} alt="This is the beautiful frame that Karthika created" />
+      </FrameBox>
+      <FrameBox2>
+        <Image height={"180px"} width={"224px"} src="/frame.png" alt="This is the beautiful frame that Karthika created" />
+      </FrameBox2>
+    </Container>
   )
+}
+
+Share.getInitialProps = async ({ query }) => {
+  const { id } = query
+
+  return { id}
 }
 
 const FrameBox2 = styled.div`
@@ -101,6 +125,7 @@ display:flex;
 align-items:center;
 padding:0rem 1rem;
 justify-content:space-between;
+
 `
 const CopyBoxP = styled.p`
 font-family: 'General Sans';
@@ -113,6 +138,9 @@ line-height: 150%;
 text-align: center;
 
 color: #000000;
+@media only screen and (max-width:600px){
+  font-size:16px
+}
 `
 
 const CopyBoxBtn = styled.div`

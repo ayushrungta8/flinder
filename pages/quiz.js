@@ -94,7 +94,7 @@ export default function Quiz() {
 
 
 const Card = styled.div`
-  min-width: 600px;
+  // min-width: 600px;
   width: 80%;
   min-height: 500px;
   background-color: #fff;
@@ -104,6 +104,9 @@ const Card = styled.div`
   padding-bottom: 50px;
   border-radius: 8px;
   overflow: hidden;
+  @media only screen and (max-width:800px){
+    width:90%
+  }
 `;
 const ProgressBarContainer = styled.div`
   width: 100%;
@@ -121,6 +124,11 @@ const Heading = styled.div`
   font-size: 28px;
   font-weight: 300;
   margin-top: 40px;
+  @media only screen and (max-width:800px){
+   font-size:18px;
+   font-weight:bold;
+   margin-top:1rem;
+  }
 `;
 const Container = styled.div`
   min-width: 100vw;
@@ -140,10 +148,16 @@ const Title = styled.h1`
     1px 1px 0 #000;
   font-family: "Aberforth", sans-serif;
   margin: 40px 0;
+
+  @media only screen and (max-width:600px){
+    font-size:60px;
+    margin:30px 0px;
+  }
 `;
 const CenterContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding:0rem 1rem;
 `;

@@ -49,6 +49,9 @@ position:absolute;
 right:2%;
 top:2%;
 transform: rotate(62.48deg);
+@media only screen and (max-width:800px){
+  display:none
+}
 
 `
 
@@ -56,12 +59,20 @@ const FrameBox = styled.div`
 position:absolute;
 left:0%;
 bottom:0%;
+@media only screen and (max-width:800px){
+ display:none
+}
 `
 
 const ShareBox = styled.div`
 display:flex;
 justify-content:space-between;
 margin-top:2rem;
+flex-wrap:wrap;
+max-width:90%;
+@media only screen and (max-width:400px){
+  justify-content:center;
+}
 
 `
 
@@ -75,6 +86,7 @@ display:flex;
 align-items:center;
 justify-content:center;
 cursor:pointer;
+margin-bottom:1rem
 `
 
 const CopyBox = styled.div`
@@ -122,6 +134,8 @@ const CenterContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+ 
 `;
 const Container = styled.div`
   min-width: 100vw;
@@ -134,6 +148,9 @@ const Container = styled.div`
   align-items: center;
   justify-content:center;
   overflow: hidden;
+  @media only screen and (max-width:800px){
+    padding:6rem 0rem; 
+  }
 `;
 const Title = styled.h1`
 font-family: 'General Sans';

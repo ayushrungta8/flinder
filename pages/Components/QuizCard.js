@@ -74,8 +74,18 @@ const Question = styled.div`
   font-size: 28px;
   font-weight: 400;
   margin: 20px 0;
+  text-align:left;
+  @media only screen and (max-width:800px){
+    font-size:16px;
+    max-width:90%;
+    margin-left:1rem;
+  }
+
 `;
-const QuestionContainer = styled.div``;
+const QuestionContainer = styled.div`
+
+
+`;
 const Option = styled.label`
   /* max-width: 600px; */
   /* background-color: #c2ccff; */
@@ -89,6 +99,10 @@ const Option = styled.label`
   align-items: center;
   margin-top: 20px;
   cursor: pointer;
+  @media only screen and (max-width:800px){
+    font-size:16px;
+    
+  }
 `;
 const Bullet = styled.div`
   height: 25px;

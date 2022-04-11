@@ -1,6 +1,8 @@
 import styled from "styled-components";
 // import { feather } from "feather-icons";
 import FeatherIcon from "feather-icons-react";
+import Link from "next/link";
+
 export default function Home() {
   return (
     <Container>
@@ -9,7 +11,9 @@ export default function Home() {
       <Title>Find YOUr IdEAl Flatmate</Title>
       <Subtitle>Because every Joey deserves a Chandler</Subtitle>
       <Button>
-        Take the quiz
+        <Link href="/quiz">
+          <a>Take the quiz</a>
+        </Link>
         <FeatherIcon icon="arrow-up-right" />
       </Button>
     </CenterContainer>
@@ -31,6 +35,7 @@ const CenterContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding:0rem 2rem;
 `;
 const Container = styled.div`
   min-width: 100vw;
@@ -50,6 +55,9 @@ const Title = styled.h1`
   text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 4px 0 #000,
     1px 1px 0 #000;
   font-family: "Aberforth", sans-serif;
+  @media only screen and (max-width:800px){
+    font-size:80px
+  }
 `;
 const Subtitle = styled.h2`
   font-weight: 500;
